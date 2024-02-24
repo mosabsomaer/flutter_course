@@ -30,20 +30,34 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text("LIMU TO DO"),
         ),
-        body:  const DefaultTabController(
+        body:  DefaultTabController(
           length: 2,
           child: Column(
             children: [
-               TabBar(
+              const TabBar(
                 labelColor: Colors.black,
                 tabs: [Tab(text: "in Progress"), Tab(text: "Completed")],
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-Center(child: Icon(Icons.check))
-,
-                    Center(child: Icon(Icons.check))
+                    Center(child: ListView.builder(
+             itemCount: tasks.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                 title: Text(tasks[index].title),
+                  trailing: Checkbox(
+                   value: tasks[index].isCompleted,
+                    onChanged: (value) {
+                      setState(() {
+                        tasks[index].isCompleted = !tasks[index].isCompleted;
+                     });
+                   },
+                 ),
+               );
+              }
+           )),
+                    Center(child: const Icon(Icons.check))
                   ],
                 ),
               ),
@@ -54,53 +68,57 @@ Center(child: Icon(Icons.check))
 }
 
 
+        
+
+
+
 
 
     
-      ,floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return  Dialog(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          "Add New Task!",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                         TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Enter Task Name',
-                          ),
-                          controller: titlecontroller,
-                        ),Row(
-                          children: [
-                            TextButton(onPressed: (){titlecontroller.clear();
-                              Navigator.pop(context);}, child: const Text("Cancel")),
-                            ElevatedButton(
-                              onPressed: (){
-                                if(titlecontroller.text.isNotEmpty){
-                                  tasks.add(TaskModel(title: titlecontroller.text));
-                                  titlecontroller.clear();
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                }
-                              },
-                              child: const Text("Add Task"),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              });
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // ,floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     showDialog(
+      //         context: context,
+      //         builder: (context) {
+      //           return  Dialog(
+      //             child: Padding(
+      //               padding: const EdgeInsets.all(24.0),
+      //               child: Column(
+      //                 mainAxisSize: MainAxisSize.min,
+      //                 children: [
+      //                   const Text(
+      //                     "Add New Task!",
+      //                     style: TextStyle(
+      //                         fontSize: 16, fontWeight: FontWeight.bold),
+      //                   ),
+      //                    TextField(
+      //                     decoration: const InputDecoration(
+      //                       hintText: 'Enter Task Name',
+      //                     ),
+      //                     controller: titlecontroller,
+      //                   ),Row(
+      //                     children: [
+      //                       TextButton(onPressed: (){titlecontroller.clear();
+      //                         Navigator.pop(context);}, child: const Text("Cancel")),
+      //                       ElevatedButton(
+      //                         onPressed: (){
+      //                           if(titlecontroller.text.isNotEmpty){
+      //                             tasks.add(TaskModel(title: titlecontroller.text));
+      //                             titlecontroller.clear();
+      //                             Navigator.pop(context);
+      //                             setState(() {});
+      //                           }
+      //                         },
+      //                         child: const Text("Add Task"),
+      //                       ),
+      //                     ],
+      //                   )
+      //                 ],
+      //               ),
+      //             ),
+      //           );
+      //         });
+      //   },
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), 
