@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text("LIMU TO DO"),
         ),
-        body:  DefaultTabController(
+        body: DefaultTabController(
           length: 2,
           child: Column(
             children: [
@@ -41,23 +41,24 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    Center(child: ListView.builder(
-             itemCount: tasks.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                 title: Text(tasks[index].title),
-                  trailing: Checkbox(
-                   value: tasks[index].isCompleted,
-                    onChanged: (value) {
-                      setState(() {
-                        tasks[index].isCompleted = !tasks[index].isCompleted;
-                     });
-                   },
-                 ),
-               );
-              }
-           )),
-                    Center(child: const Icon(Icons.check))
+                    Center(
+                        child: ListView.builder(
+                            itemCount: tasks.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(tasks[index].title),
+                                trailing: Checkbox(
+                                  value: tasks[index].isCompleted,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      tasks[index].isCompleted =
+                                          !tasks[index].isCompleted;
+                                    });
+                                  },
+                                ),
+                              );
+                            })),
+                    const Center(child: Icon(Icons.check))
                   ],
                 ),
               ),
@@ -122,3 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
       //   tooltip: 'Increment',
       //   child: const Icon(Icons.add),
       // ), 
+
+
+
+
+
+
+      //sdfdsfdsf
